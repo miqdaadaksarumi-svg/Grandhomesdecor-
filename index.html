@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grandhomes Atelier — Interior Design Studio, Lagos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,500&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15120F;
+    --panel:#1E1A15;
+    --ivory:#F2ECE1;
+    --wine:#8C3B3B;
+    --wine-bright:#B24B4B;
+    --brass:#C9A227;
+    --line: rgba(242,236,225,0.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;min-width:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--ivory);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;}
+  .mono{font-family:'Space Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1220px;margin:0 auto;padding:0 32px;}
+  @media(max-width:640px){.wrap{padding:0 20px;}}
+
+  /* Header */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    background:rgba(21,18,15,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:20px 32px;max-width:1220px;margin:0 auto;}
+  .logo{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:700;letter-spacing:0.01em;}
+  .logo em{color:var(--wine-bright);font-style:italic;font-weight:500;}
+  .nav-links{display:flex;gap:34px;font-size:0.82rem;letter-spacing:0.04em;text-transform:uppercase;}
+  .nav-links a{opacity:0.7;transition:opacity 0.2s;font-family:'Space Mono',monospace;}
+  .nav-links a:hover{opacity:1;color:var(--brass);}
+  .nav-cta{background:var(--wine);color:var(--ivory);padding:10px 20px;font-size:0.78rem;letter-spacing:0.04em;text-transform:uppercase;font-family:'Space Mono',monospace;border-radius:1px;}
+  .menu-toggle{
+    display:none;background:none;border:1px solid var(--line);color:var(--ivory);
+    width:42px;height:42px;cursor:pointer;position:relative;z-index:210;border-radius:2px;
+  }
+  .menu-toggle .bar{display:block;width:18px;height:1px;background:var(--ivory);margin:4px auto;transition:all 0.3s;}
+  .menu-toggle.open .bar:nth-child(1){transform:translateY(5px) rotate(45deg);}
+  .menu-toggle.open .bar:nth-child(2){opacity:0;}
+  .menu-toggle.open .bar:nth-child(3){transform:translateY(-5px) rotate(-45deg);}
+  @media(max-width:840px){
+    .nav-links{display:none;}
+    .nav-cta{display:none;}
+    .menu-toggle{display:block;}
+  }
+
+  /* Mobile nav overlay */
+  .mobile-nav{
+    position:fixed;inset:0;background:var(--ink);z-index:190;
+    display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:8px;
+    padding:40px;
+    transform:translateY(-100%);transition:transform 0.4s ease;
+  }
+  .mobile-nav.open{transform:translateY(0);}
+  .mobile-nav a{
+    font-family:'Fraunces',serif;font-size:2.2rem;font-weight:600;
+    padding:14px 0;border-bottom:1px solid var(--line);width:100%;
+  }
+  .mobile-nav .mn-cta{
+    margin-top:24px;background:var(--wine);color:var(--ivory);
+    padding:16px 28px;font-family:'Space Mono',monospace;font-size:0.9rem;
+    text-transform:uppercase;letter-spacing:0.04em;border-bottom:none;width:auto;
+  }
+
+  /* Hero */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;z-index:0;}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;}
+  .hero-bg::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(21,18,15,0.35) 0%, rgba(21,18,15,0.55) 55%, rgba(21,18,15,0.95) 100%);
+  }
+  .hero-content{position:relative;z-index:2;padding:0 32px 90px;max-width:1220px;margin:0 auto;width:100%;}
+  .hero-eyebrow{
+    font-family:'Space Mono',monospace;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--brass);margin-bottom:22px;display:flex;align-items:center;gap:10px;
+  }
+  .hero-eyebrow::before{content:'';width:26px;height:1px;background:var(--brass);}
+  .hero h1{font-size:clamp(2.6rem,7vw,5.4rem);line-height:0.98;margin-bottom:28px;max-width:820px;}
+  .hero h1 em{color:var(--wine-bright);font-style:italic;font-weight:500;}
+  .hero-sub{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;}
+  .hero-sub p{max-width:400px;opacity:0.82;font-size:1rem;}
+  .btn-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{display:inline-block;padding:15px 28px;font-size:0.85rem;font-weight:600;letter-spacing:0.03em;text-transform:uppercase;border-radius:1px;transition:all 0.25s;font-family:'Space Mono',monospace;}
+  .btn-primary{background:var(--wine);color:var(--ivory);}
+  .btn-primary:hover{background:var(--wine-bright);}
+  .btn-ghost{border:1px solid var(--ivory);}
+  .btn-ghost:hover{background:var(--ivory);color:var(--ink);}
+
+  /* Annotation callouts — signature element */
+  .annotation{
+    position:absolute;z-index:2;
+    display:flex;align-items:center;gap:10px;
+    font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.03em;
+    color:var(--ivory);
+  }
+  .annotation .dot{width:6px;height:6px;border-radius:50%;background:var(--brass);flex-shrink:0;}
+  .annotation .leader{width:34px;height:1px;background:var(--brass);opacity:0.7;}
+  .annotation .label{background:rgba(21,18,15,0.75);padding:6px 10px;border:1px solid var(--line);border-radius:1px;backdrop-filter:blur(4px);}
+  @media(max-width:640px){.annotation{display:none;}}
+
+  /* Rating strip */
+  .rating-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel);}
+  .rating-strip .wrap{display:flex;justify-content:space-between;align-items:center;padding:18px 32px;flex-wrap:wrap;gap:12px;}
+  .rating-strip .stars{color:var(--brass);letter-spacing:2px;}
+  .rating-strip .r-item{font-family:'Space Mono',monospace;font-size:0.8rem;opacity:0.8;display:flex;align-items:center;gap:10px;}
+
+  section{padding:130px 0;}
+  @media(max-width:640px){section{padding:80px 0;}}
+  .eyebrow{font-family:'Space Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brass);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:'';width:26px;height:1px;background:var(--brass);}
+  .section-head{max-width:600px;margin-bottom:60px;}
+  .section-head h2{font-size:clamp(2rem,3.8vw,3rem);}
+  .section-head p{opacity:0.75;margin-top:18px;font-size:1rem;max-width:480px;}
+
+  /* About — editorial split */
+  .about-split{display:grid;grid-template-columns:0.85fr 1.15fr;gap:70px;align-items:center;}
+  @media(max-width:900px){.about-split{grid-template-columns:1fr;gap:40px;}}
+  .about-split img{border-radius:2px;width:100%;aspect-ratio:3/4;object-fit:cover;}
+  .pull-quote{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:1.6rem;line-height:1.4;margin-bottom:28px;color:var(--ivory);}
+  .pull-quote span{color:var(--wine-bright);}
+  .about-split .body-text{opacity:0.78;margin-bottom:28px;}
+  .stat-row{display:flex;gap:44px;}
+  .stat b{display:block;font-family:'Fraunces',serif;font-size:2.1rem;color:var(--brass);}
+  .stat span{font-family:'Space Mono',monospace;font-size:0.72rem;opacity:0.65;text-transform:uppercase;letter-spacing:0.04em;}
+
+  /* Process spec-sheet */
+  .process{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .spec-row{border-top:1px solid var(--line);}
+  .spec-item{
+    display:grid;grid-template-columns:80px 200px 1fr;gap:24px;
+    padding:32px 0;border-bottom:1px solid var(--line);align-items:baseline;
+  }
+  @media(max-width:700px){.spec-item{grid-template-columns:50px 1fr;}
+    .spec-item .spec-title{grid-column:2;}
+    .spec-item .spec-desc{grid-column:2;}
+  }
+  .spec-item .spec-num{font-family:'Space Mono',monospace;color:var(--brass);font-size:0.85rem;}
+  .spec-item .spec-title{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600;}
+  .spec-item .spec-desc{opacity:0.72;font-size:0.94rem;max-width:480px;}
+
+  /* Portfolio — full bleed alternating with annotations */
+  .room-block{position:relative;margin-bottom:6px;}
+  .room-block img{width:100%;height:78vh;object-fit:cover;}
+  @media(max-width:700px){.room-block img{height:52vh;}}
+  .room-caption{
+    position:absolute;bottom:28px;left:28px;z-index:2;
+    background:rgba(21,18,15,0.7);backdrop-filter:blur(6px);
+    padding:16px 22px;border:1px solid var(--line);border-radius:1px;
+    max-width:320px;
+  }
+  .room-caption .r-cat{font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--brass);margin-bottom:6px;}
+  .room-caption h4{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600;}
+  .filter-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:44px;}
+  .filter-btn{
+    padding:10px 18px;border:1px solid var(--line);border-radius:20px;
+    font-family:'Space Mono',monospace;font-size:0.75rem;letter-spacing:0.03em;text-transform:uppercase;
+    cursor:pointer;background:transparent;color:var(--ivory);transition:all 0.2s;
+  }
+  .filter-btn.active,.filter-btn:hover{background:var(--wine);border-color:var(--wine);}
+  .hidden{display:none !important;}
+
+  /* Testimonials — large pull quote over image */
+  .testimonial-feature{position:relative;}
+  .testimonial-feature img{width:100%;height:70vh;object-fit:cover;}
+  @media(max-width:700px){.testimonial-feature img{height:50vh;}}
+  .testimonial-feature::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,18,15,0.5),rgba(21,18,15,0.85));}
+  .t-overlay{position:absolute;inset:0;z-index:2;display:flex;align-items:center;}
+  .t-overlay .wrap{width:100%;}
+  .t-quote{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:clamp(1.4rem,3vw,2.2rem);max-width:760px;line-height:1.35;margin-bottom:24px;}
+  .t-who{font-family:'Space Mono',monospace;font-size:0.8rem;opacity:0.8;}
+  .mini-testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);}
+  @media(max-width:800px){.mini-testimonials{grid-template-columns:1fr;}}
+  .mini-t{background:var(--ink);padding:32px;}
+  .mini-t .stars{color:var(--brass);font-size:0.85rem;letter-spacing:2px;margin-bottom:14px;}
+  .mini-t p{font-size:0.92rem;opacity:0.82;margin-bottom:14px;}
+  .mini-t .who{font-family:'Space Mono',monospace;font-size:0.75rem;opacity:0.6;}
+
+  /* Booking */
+  .booking{background:var(--panel);border-top:1px solid var(--line);}
+  .booking-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:60px;min-width:0;}
+  @media(max-width:900px){.booking-grid{grid-template-columns:1fr;}}
+  .booking-grid > *{min-width:0;}
+  .booking-info h3{font-family:'Fraunces',serif;font-size:1.5rem;margin-bottom:16px;}
+  .booking-info p{opacity:0.75;margin-bottom:26px;}
+  .info-line{display:flex;gap:14px;margin-bottom:16px;font-size:0.9rem;font-family:'Space Mono',monospace;flex-wrap:wrap;word-break:break-word;}
+  .info-line b{min-width:100px;color:var(--brass);font-weight:400;}
+  form{display:flex;flex-direction:column;gap:16px;min-width:0;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;min-width:0;}
+  .form-row > div{min-width:0;}
+  @media(max-width:560px){.form-row{grid-template-columns:1fr;}}
+  label{font-family:'Space Mono',monospace;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px;display:block;opacity:0.7;}
+  input,select,textarea{
+    width:100%;max-width:100%;padding:13px 14px;border:1px solid var(--line);
+    background:var(--ink);border-radius:1px;font-family:'Inter',sans-serif;
+    font-size:0.95rem;color:var(--ivory);
+    box-sizing:border-box;
+  }
+  input:focus,select:focus,textarea:focus{outline:1px solid var(--brass);outline-offset:1px;}
+  textarea{resize:vertical;min-height:90px;}
+  .submit-btn{
+    background:var(--wine);color:var(--ivory);border:none;
+    padding:16px;font-family:'Space Mono',monospace;font-size:0.85rem;letter-spacing:0.04em;text-transform:uppercase;
+    cursor:pointer;border-radius:1px;transition:background 0.25s;
+  }
+  .submit-btn:hover{background:var(--wine-bright);}
+  .form-note{font-size:0.76rem;opacity:0.55;margin-top:2px;}
+  .form-success{display:none;background:var(--brass);color:var(--ink);padding:16px;border-radius:1px;font-size:0.9rem;font-weight:600;}
+
+  footer{padding:60px 0 36px;border-top:1px solid var(--line);}
+  .footer-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-bottom:40px;}
+  .footer-brand p{font-size:0.86rem;opacity:0.6;max-width:280px;margin-top:10px;}
+  .footer-links{display:flex;gap:60px;flex-wrap:wrap;}
+  .footer-col h4{font-family:'Space Mono',monospace;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;opacity:0.55;}
+  .footer-col a{display:block;font-size:0.9rem;margin-bottom:10px;opacity:0.75;}
+  .footer-bottom{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:0.72rem;opacity:0.5;flex-wrap:wrap;gap:10px;}
+
+  .wa-float{
+    position:fixed;bottom:24px;right:24px;z-index:99;
+    width:56px;height:56px;border-radius:50%;
+    background:#25D366;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 18px rgba(0,0,0,0.4);transition:transform 0.2s;
+  }
+  .wa-float:hover{transform:scale(1.08);}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;} html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">Grandhomes <em>Atelier</em></div>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#process">Process</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#booking">Contact</a>
+    </nav>
+    <a href="#booking" class="nav-cta">Book Consultation</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about">About</a>
+  <a href="#process">Process</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#testimonials">Reviews</a>
+  <a href="#booking">Contact</a>
+  <a href="#booking" class="mn-cta">Book Consultation</a>
+</div>
+
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1400&q=80" alt="Grandhomes Atelier living room">
+  </div>
+  <div class="annotation" style="top:22%;left:8%;">
+    <span class="dot"></span><span class="leader"></span>
+    <span class="label">Reclaimed oak flooring</span>
+  </div>
+  <div class="annotation" style="top:42%;right:10%;">
+    <span class="dot"></span><span class="leader"></span>
+    <span class="label">Brass hardware detail</span>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Interior Design Atelier — Lagos</div>
+    <h1>Homes built<br>to feel <em>considered.</em></h1>
+    <div class="hero-sub">
+      <p>We design interiors that balance warmth and precision — for homes that are lived in fully, not just photographed.</p>
+      <div class="btn-row">
+        <a href="#booking" class="btn btn-primary">Book Consultation</a>
+        <a href="#portfolio" class="btn btn-ghost">View Portfolio</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rating-strip">
+  <div class="wrap">
+    <div class="r-item"><span class="stars">★★★★★</span> 5.0 Google Rating</div>
+    <div class="r-item">40+ Homes Designed</div>
+    <div class="r-item">6 Years in Practice</div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap about-split reveal">
+    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80" alt="Designer at work">
+    <div>
+      <div class="eyebrow">About the Studio</div>
+      <p class="pull-quote">A beautiful home should also <span>work hard</span> for the people living in it.</p>
+      <p class="body-text">Grandhomes Atelier begins every project with how a family actually moves through their space, before a single material is chosen. From full home transformations to focused single-room refreshes, we bring together considered materials, functional layouts, and a restrained, elevated palette — tailored to each client, never templated.</p>
+      <div class="stat-row">
+        <div class="stat"><b>40+</b><span>Projects</span></div>
+        <div class="stat"><b>6</b><span>Years</span></div>
+        <div class="stat"><b>100%</b><span>Client-led</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Spec Sheet</div>
+      <h2>How a project comes together</h2>
+    </div>
+    <div class="spec-row reveal">
+      <div class="spec-item">
+        <div class="spec-num">01</div>
+        <div class="spec-title">Discover</div>
+        <div class="spec-desc">A walkthrough of your space and how your household actually uses it — in person or over WhatsApp.</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">02</div>
+        <div class="spec-title">Design</div>
+        <div class="spec-desc">A full concept board — palette, materials, layout — built specifically around your home and budget.</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">03</div>
+        <div class="spec-title">Execute</div>
+        <div class="spec-desc">We manage sourcing, installation, and finishing touches, so you're not chasing vendors yourself.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Selected Work</div>
+      <h2>A closer look at recent projects</h2>
+    </div>
+    <div class="filter-row reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="living">Living Rooms</button>
+      <button class="filter-btn" data-filter="bedroom">Bedrooms</button>
+      <button class="filter-btn" data-filter="kitchen">Kitchens</button>
+    </div>
+  </div>
+
+  <div class="room-block reveal" data-cat="living">
+    <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1400&q=80" alt="Living room">
+    <div class="room-caption"><div class="r-cat">Living Room</div><h4>Lekki Residence</h4></div>
+  </div>
+  <div class="room-block reveal" data-cat="bedroom">
+    <img src="https://images.unsplash.com/photo-1616594039964-ae9021efd8d3?w=1400&q=80" alt="Bedroom">
+    <div class="room-caption"><div class="r-cat">Bedroom</div><h4>Ikoyi Apartment</h4></div>
+  </div>
+  <div class="room-block reveal" data-cat="kitchen">
+    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1400&q=80" alt="Kitchen">
+    <div class="room-caption"><div class="r-cat">Kitchen</div><h4>Victoria Island Home</h4></div>
+  </div>
+  <div class="room-block reveal" data-cat="living">
+    <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=1400&q=80" alt="Living room">
+    <div class="room-caption"><div class="r-cat">Living Room</div><h4>Banana Island Villa</h4></div>
+  </div>
+</section>
+
+<div class="testimonial-feature reveal">
+  <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1400&q=80" alt="Bedroom detail">
+  <div class="t-overlay">
+    <div class="wrap">
+      <p class="t-quote">"From the first call to the final walkthrough, everything felt considered. Worth every naira."</p>
+      <div class="t-who">FUNMI A. — BANANA ISLAND</div>
+    </div>
+  </div>
+</div>
+
+<section id="testimonials" style="padding-top:0;">
+  <div class="mini-testimonials reveal">
+    <div class="mini-t">
+      <div class="stars">★★★★★</div>
+      <p>"They understood exactly how our family actually uses our home — the result feels effortless."</p>
+      <div class="who">ADAEZE O. — LEKKI PHASE 1</div>
+    </div>
+    <div class="mini-t">
+      <div class="stars">★★★★★</div>
+      <p>"A completely different level of finish and attention to detail than we expected."</p>
+      <div class="who">TUNDE B. — IKOYI</div>
+    </div>
+    <div class="mini-t">
+      <div class="stars">★★★★★</div>
+      <p>"Professional from day one, and the space feels like us — not a showroom."</p>
+      <div class="who">CHIDI N. — CHEVRON DRIVE</div>
+    </div>
+  </div>
+</section>
+
+<section class="booking" id="booking">
+  <div class="wrap booking-grid">
+    <div class="booking-info reveal">
+      <div class="eyebrow">Get in Touch</div>
+      <h3>Book a design consultation</h3>
+      <p>Tell us a little about your space and preferred timing. We'll confirm your appointment directly on WhatsApp within one business day.</p>
+      <div class="info-line"><b>WhatsApp</b> <span>+234 XXX XXX XXXX</span></div>
+      <div class="info-line"><b>Email</b> <span>hello@grandhomesatelier.com</span></div>
+      <div class="info-line"><b>Studio</b> <span>Lagos, Nigeria</span></div>
+    </div>
+    <div class="reveal">
+      <form id="bookingForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-row">
+          <div><label for="name">Full name</label><input type="text" id="name" name="name" required></div>
+          <div><label for="phone">Phone number</label><input type="tel" id="phone" name="phone" required></div>
+        </div>
+        <div>
+          <label for="service">Service needed</label>
+          <select id="service" name="service">
+            <option>Full Home Design</option>
+            <option>Room Refresh</option>
+            <option>Design Consultation</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div><label for="date">Preferred date</label><input type="date" id="date" name="date"></div>
+          <div><label for="time">Preferred time</label><input type="time" id="time" name="time"></div>
+        </div>
+        <div>
+          <label for="notes">Tell us about your space</label>
+          <textarea id="notes" name="notes" placeholder="Room type, size, style you're drawn to..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Request Consultation</button>
+        <div class="form-note">We'll confirm your exact appointment time by WhatsApp or phone.</div>
+        <div class="form-success" id="formSuccess">Thank you — we'll be in touch within one business day to confirm your appointment.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">Grandhomes <em>Atelier</em></div>
+        <p>Interior design studio based in Lagos, crafting considered homes across Nigeria.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Studio</h4>
+          <a href="#about">About</a>
+          <a href="#process">Process</a>
+          <a href="#portfolio">Portfolio</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="#booking">Book Consultation</a>
+          <a href="https://instagram.com" target="_blank">Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 GRANDHOMES ATELIER. ALL RIGHTS RESERVED.</span>
+      <span>LAGOS, NIGERIA</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/234XXXXXXXXXX" class="wa-float" target="_blank" aria-label="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.83 14.14c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.95-.31-1.64-.6-2.88-1.24-4.75-4.13-4.9-4.32-.14-.2-1.17-1.56-1.17-2.98s.74-2.11 1-2.4c.26-.29.57-.36.76-.36h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.31.02.5-.1.19-.15.31-.3.48-.15.17-.31.38-.45.51-.15.14-.3.3-.13.59.17.29.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.34 1.44.29.14.46.12.63-.07.17-.19.72-.84.92-1.13.19-.28.38-.24.64-.14.26.1 1.63.77 1.9.91.28.14.46.21.53.33.07.12.07.68-.17 1.36z"/></svg>
+</a>
+
+<script>
+  // Mobile nav toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  menuToggle.addEventListener('click', ()=>{
+    menuToggle.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-nav a').forEach(a=>{
+    a.addEventListener('click', ()=>{
+      menuToggle.classList.remove('open');
+      mobileNav.classList.remove('open');
+    });
+  });
+
+  // Portfolio filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const rooms = document.querySelectorAll('.room-block');
+  filterBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      filterBtns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      rooms.forEach(r=>{
+        r.classList.toggle('hidden', f!=='all' && r.dataset.cat!==f);
+      });
+    });
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.1});
+  reveals.forEach(r=>io.observe(r));
+
+  // Booking form
+  const form = document.getElementById('bookingForm');
+  const success = document.getElementById('formSuccess');
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const data = new FormData(form);
+    try{
+      const res = await fetch(form.action, {method:'POST', body:data, headers:{'Accept':'application/json'}});
+      if(res.ok){ form.reset(); form.style.display='none'; success.style.display='block'; }
+      else{ alert('Something went wrong — please try again or message us on WhatsApp.'); }
+    }catch(err){ alert('Something went wrong — please try again or message us on WhatsApp.'); }
+  });
+</script>
+
+</body>
+</html>
